@@ -59,13 +59,13 @@ def configROSMASTER(master_host_name):
     # read the current .zshrc file
     zshrc_file = open(zshrc_fp,"r").read()
 
-    new_uri = "export ROS_MASTER_URI=http://"+master_host_name+":11311\n";
+    new_uri = "http://"+master_host_name+":11311\n";
 
     for line in zshrc_file.split("\n"):
         # Find the ROS_MASTER entry
         if ("export ROS_MASTER_URI" in line) and (not "#" in line):
             # Replace the entry with one network and remote host name
-            temp_file.write(new_uri)
+            temp_file.write("export ROS_MASTER_URI="+new_uri)
         else: 
             temp_file.write(line+"\n")
 
@@ -84,18 +84,17 @@ def configROSMASTER(master_host_name):
 if __name__ == "__main__":
 
     # Handle the argument parsing
-    parser = argparse.ArgumentParser(description='Configure the network settings for our robot')
+    parser = argparse.ArgumentParser(description='Configure the network settings for our laptop and robot')
     parser.add_argument("-H","--host", help="the host device we are changing settings in",
                                     choices=(laptop_name, robot_name))
 
     parser.add_argument("-n","--network", help="network the devices are on",
                                     choices=('VPN', 'shop', 'field'))
 
-    args = parser.parse_args()
+    parser.add_argument("-r","--rosmaster", help="The ros master hostname",
+                                    choices=(laptop_name, robot_name))
 
-    # Default host handler 
-    if args.host == None:
-        args.host = laptop_name
+    args = parser.parse_args()
 
     # Handle the dev-laptop host
     # Here we open the hosts file and change the primo IP to the appropriate one.
@@ -107,3 +106,6 @@ if __name__ == "__main__":
         #
         configHosts(robot_name, robot_ip.get(args.network))
 
+    # Handle the ros master
+    if args.rosmaster:
+        configROSMASTER(args.rosmaster)
