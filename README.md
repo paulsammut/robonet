@@ -7,16 +7,18 @@ hosts file manually on two computers and opening a vpn every morning.
 ## What robonet does
 
 * Take in a host argument (-H):
-    * laptop (default)
+    * dev-laptop 
     * primo
-* Take in a laptop network argument (-l):
+* Take in a network argument (-n):
     * home (default)
     * shop
     * field
-* Take in a robot network argument (-r):
-    * shop (default)
-    * field
+* Take a ROS_MASTER argument (-r):
+    * primo
+    * dev-laptop
+
 * Modify /etc/hosts file and put in the right ip
-* If home, also open a vpn connection to primo
-* SSH into primo and run a script a command that sets the correct dev-laptop IP in
-  the hosts file
+* If ROS_MASTER argument provided, set it in the ~/.zshrc file.
+
+Script must be run as sudo to edit the /etc/hosts file
+
