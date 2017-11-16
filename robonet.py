@@ -107,6 +107,14 @@ if __name__ == "__main__":
         #
         configHosts(robot_name, robot_ip.get(args.network))
 
+    if args.host == robot_name:
+        # Make a check to make sure the network arguments have been added
+        if args.network == None:
+            print "Network must be specified!"
+            quit()
+        #
+        configHosts(laptop_name, laptop_ip.get(args.network))
+
     # Handle the ros master
     if args.rosmaster:
         configROSMASTER(args.rosmaster)
