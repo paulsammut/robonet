@@ -6,7 +6,7 @@ hosts file manually on two computers and opening a vpn every morning.
 
 ## What robonet does
 
-* Take in a host argument (-h):
+* Take in a host argument (-H):
     * laptop (default)
     * primo
 * Take in a laptop network argument (-l):
