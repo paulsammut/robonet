@@ -5,11 +5,12 @@ import argparse
 from tempfile import mkstemp
 from os import fdopen, remove, chmod
 from shutil import move
+import os
 
 robot_name = "primo"
 laptop_name = "dev-laptop"
 hosts_fp = "/etc/hosts"              # hosts file path
-zshrc_fp = ".zshrc"
+zshrc_fp = os.path.expanduser('~/.zshrc')
 
 # Create the dictionaries for the ip addresses
 robot_ip = {
